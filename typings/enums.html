@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>枚举 | 深入理解 TypeScript</title>
+    <meta name="description" content="TypeScript Deep Dive 中文版">
+    <link rel="icon" href="/typescript-book-chinese/logo.png">
+  <link rel="manifest" href="/typescript-book-chinese/manifest.json">
+  <meta name="theme-color" content="#3eaf7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="msapplication-TileColor" content="#000000">
+    
+    <link rel="preload" href="/typescript-book-chinese/assets/css/0.styles.716162a8.css" as="style"><link rel="preload" href="/typescript-book-chinese/assets/js/app.5461745b.js" as="script"><link rel="preload" href="/typescript-book-chinese/assets/js/17.4cb9c367.js" as="script"><link rel="prefetch" href="/typescript-book-chinese/assets/js/18.792f2a04.js"><link rel="prefetch" href="/typescript-book-chinese/assets/js/2.26cc2a1e.js"><link rel="prefetch" href="/typescript-book-chinese/assets/js/3.b67958c5.js"><link rel="prefetch" href="/typescript-book-chinese/assets/js/4.a98350b7.js"><link rel="prefetch" href="/typescript-book-chinese/assets/js/5.5037531c.js"><link rel="prefetch" href="/typescript-book-chinese/assets/js/6.a7f2f0dd.js"><link rel="prefetch" href="/typescript-book-chinese/assets/js/7.1b353563.js"><link rel="prefetch" href="/typescript-book-chinese/assets/js/8.eb671b64.js"><link rel="prefetch" href="/typescript-book-chinese/assets/js/9.2e3ec5b0.js"><link rel="prefetch" href="/typescript-book-chinese/assets/js/10.b67fa48c.js"><link rel="prefetch" href="/typescript-book-chinese/assets/js/11.d8320698.js"><link rel="prefetch" href="/typescript-book-chinese/assets/js/12.fdf82954.js"><link rel="prefetch" href="/typescript-book-chinese/assets/js/13.53b72c5e.js"><link rel="prefetch" href="/typescript-book-chinese/assets/js/14.3e1738eb.js"><link rel="prefetch" href="/typescript-book-chinese/assets/js/15.6bee0aeb.js"><link rel="prefetch" href="/typescript-book-chinese/assets/js/16.cb5a8006.js"><link rel="prefetch" href="/typescript-book-chinese/assets/js/19.a286ff5c.js"><link rel="prefetch" href="/typescript-book-chinese/assets/js/20.f8d1618b.js"><link rel="prefetch" href="/typescript-book-chinese/assets/js/21.472b1d89.js"><link rel="prefetch" href="/typescript-book-chinese/assets/js/22.7842de8f.js"><link rel="prefetch" href="/typescript-book-chinese/assets/js/23.c32a3a1c.js"><link rel="prefetch" href="/typescript-book-chinese/assets/js/24.cbce2b0e.js"><link rel="prefetch" href="/typescript-book-chinese/assets/js/25.f7669bc2.js"><link rel="prefetch" href="/typescript-book-chinese/assets/js/26.0db6808e.js"><link rel="prefetch" href="/typescript-book-chinese/assets/js/27.2edee372.js"><link rel="prefetch" href="/typescript-book-chinese/assets/js/28.aa3654af.js"><link rel="prefetch" href="/typescript-book-chinese/assets/js/29.700f7170.js"><link rel="prefetch" href="/typescript-book-chinese/assets/js/30.1e971929.js"><link rel="prefetch" href="/typescript-book-chinese/assets/js/31.8570b01e.js"><link rel="prefetch" href="/typescript-book-chinese/assets/js/32.de56d58f.js"><link rel="prefetch" href="/typescript-book-chinese/assets/js/33.343a2aed.js"><link rel="prefetch" href="/typescript-book-chinese/assets/js/34.2b446ec1.js"><link rel="prefetch" href="/typescript-book-chinese/assets/js/35.12828776.js"><link rel="prefetch" href="/typescript-book-chinese/assets/js/36.2bd0f162.js"><link rel="prefetch" href="/typescript-book-chinese/assets/js/vendors~docsearch.bdf31886.js">
+    <link rel="stylesheet" href="/typescript-book-chinese/assets/css/0.styles.716162a8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/typescript-book-chinese/" class="home-link router-link-active"><!----> <span class="site-name">深入理解 TypeScript</span></a> <div class="links"><form id="search-form" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"><div class="nav-item"><a href="https://jkchao.cn" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Blog
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <a href="https://github.com/jkchao/typescript-book-chinese" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="https://jkchao.cn" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Blog
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <a href="https://github.com/jkchao/typescript-book-chinese" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><div class="sidebar-group first"><p class="sidebar-heading"><span>写在前面</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/typescript-book-chinese/" class="sidebar-link">深入理解 TypeScript</a></li></ul></div></li><li><div class="sidebar-group"><p class="sidebar-heading"><span>TypeScript 项目</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/typescript-book-chinese/project/compilationContext.html" class="sidebar-link">编译上下文</a></li><li><a href="/typescript-book-chinese/project/declarationspaces.html" class="sidebar-link">声明空间</a></li><li><a href="/typescript-book-chinese/project/modules.html" class="sidebar-link">模块</a></li><li><a href="/typescript-book-chinese/project/namespaces.html" class="sidebar-link">命名空间</a></li><li><a href="/typescript-book-chinese/project/dynamicImportExpressions.html" class="sidebar-link">动态导入表达式</a></li></ul></div></li><li><div class="sidebar-group"><p class="sidebar-heading open"><span>TypeScript 类型系统</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/typescript-book-chinese/typings/overview.html" class="sidebar-link">概览</a></li><li><a href="/typescript-book-chinese/typings/migrating.html" class="sidebar-link">从 JavaScript 迁移</a></li><li><a href="/typescript-book-chinese/typings/types.html" class="sidebar-link">@types</a></li><li><a href="/typescript-book-chinese/typings/ambient.html" class="sidebar-link">环境声明</a></li><li><a href="/typescript-book-chinese/typings/interfaces.html" class="sidebar-link">接口</a></li><li><a href="/typescript-book-chinese/typings/enums.html" class="active sidebar-link">枚举</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/typescript-book-chinese/typings/enums.html#数字类型枚举与数字类型" class="sidebar-link">数字类型枚举与数字类型</a></li><li class="sidebar-sub-header"><a href="/typescript-book-chinese/typings/enums.html#数字类型枚举与字符串类型" class="sidebar-link">数字类型枚举与字符串类型</a></li><li class="sidebar-sub-header"><a href="/typescript-book-chinese/typings/enums.html#改变与数字枚举关联的数字" class="sidebar-link">改变与数字枚举关联的数字</a></li><li class="sidebar-sub-header"><a href="/typescript-book-chinese/typings/enums.html#使用数字类型作为标志" class="sidebar-link">使用数字类型作为标志</a></li><li class="sidebar-sub-header"><a href="/typescript-book-chinese/typings/enums.html#字符串枚举" class="sidebar-link">字符串枚举</a></li><li class="sidebar-sub-header"><a href="/typescript-book-chinese/typings/enums.html#常量枚举" class="sidebar-link">常量枚举</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/typescript-book-chinese/typings/enums.html#常量枚举-preserveconstenums-选项" class="sidebar-link">常量枚举 preserveConstEnums 选项</a></li></ul></li><li class="sidebar-sub-header"><a href="/typescript-book-chinese/typings/enums.html#有静态方法的枚举" class="sidebar-link">有静态方法的枚举</a></li><li class="sidebar-sub-header"><a href="/typescript-book-chinese/typings/enums.html#开放式枚举" class="sidebar-link">开放式枚举</a></li></ul></li><li><a href="/typescript-book-chinese/typings/lib.html" class="sidebar-link">lib.d.ts</a></li><li><a href="/typescript-book-chinese/typings/functions.html" class="sidebar-link">函数</a></li><li><a href="/typescript-book-chinese/typings/callable.html" class="sidebar-link">可调用的</a></li><li><a href="/typescript-book-chinese/typings/typeAssertion.html" class="sidebar-link">类型断言</a></li><li><a href="/typescript-book-chinese/typings/freshness.html" class="sidebar-link">Freshness</a></li><li><a href="/typescript-book-chinese/typings/typeGuard.html" class="sidebar-link">类型保护</a></li><li><a href="/typescript-book-chinese/typings/literals.html" class="sidebar-link">字面量类型</a></li><li><a href="/typescript-book-chinese/typings/readonly.html" class="sidebar-link">Readonly</a></li><li><a href="/typescript-book-chinese/typings/generices.html" class="sidebar-link">泛型</a></li><li><a href="/typescript-book-chinese/typings/typeInference.html" class="sidebar-link">类型推断</a></li><li><a href="/typescript-book-chinese/typings/typeCompatibility.html" class="sidebar-link">类型兼容性</a></li><li><a href="/typescript-book-chinese/typings/neverType.html" class="sidebar-link">Never</a></li><li><a href="/typescript-book-chinese/typings/discrominatedUnion.html" class="sidebar-link">辨析联合类型</a></li><li><a href="/typescript-book-chinese/typings/indexSignatures.html" class="sidebar-link">索引签名</a></li><li><a href="/typescript-book-chinese/typings/movingTypes.html" class="sidebar-link">流动的类型</a></li><li><a href="/typescript-book-chinese/typings/exceptionsHanding.html" class="sidebar-link">异常处理</a></li><li><a href="/typescript-book-chinese/typings/mixins.html" class="sidebar-link">混合</a></li></ul></div></li><li><div class="sidebar-group"><p class="sidebar-heading"><span>JSX</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/typescript-book-chinese/jsx/support.html" class="sidebar-link">支持 JSX</a></li></ul></div></li><li><div class="sidebar-group"><p class="sidebar-heading"><span>TypeScript 错误提示</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/typescript-book-chinese/error/interpreting.html" class="sidebar-link">解读 Errors</a></li><li><a href="/typescript-book-chinese/error/common.html" class="sidebar-link">常见的 Error</a></li></ul></div></li><li><div class="sidebar-group"><p class="sidebar-heading"><span>TIPs</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/typescript-book-chinese/tips/stringBasedEmuns.html" class="sidebar-link">基于字符串的枚举</a></li></ul></div></li><li><div class="sidebar-group"><p class="sidebar-heading"><span>TypeScript 编译原理</span> <!----></p> <ul class="sidebar-group-items"></ul></div></li></ul> </div> <div class="page"> <div class="content"><h1 id="枚举"><a href="#枚举" aria-hidden="true" class="header-anchor">#</a> 枚举</h1> <p>枚举是组织收集有关联变量的一种方式，许多程序语言（如：c/c#/Java）都有枚举数据类型，但 JavaScript 却没有，TypeScript 有。下面是定义一个 TypeScript 枚举类型的方式：</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token keyword">enum</span> CardSuit <span class="token punctuation">{</span>
+  Clubs<span class="token punctuation">,</span>
+  Diamonds<span class="token punctuation">,</span>
+  Hearts<span class="token punctuation">,</span>
+  Spades
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 简单的使用枚举类型</span>
+<span class="token keyword">let</span> Card <span class="token operator">=</span> CardSuit<span class="token punctuation">.</span>Clubs
+
+<span class="token comment">// 类型安全</span>
+card <span class="token operator">=</span> <span class="token string">'not a member of card suit'</span>  <span class="token comment">// Error: string 不能赋值给 `CardSuit` 类型</span>
+</code></pre></div><p>这些枚举类型的值都是数字的，因此我称它们为数字类型枚举。</p> <h2 id="数字类型枚举与数字类型"><a href="#数字类型枚举与数字类型" aria-hidden="true" class="header-anchor">#</a> 数字类型枚举与数字类型</h2> <p>TypeScript 枚举类型是基于数字的，这意味着可以将数字类型赋值给枚举类型的实例，以及任何与数字类型兼容的其他任何类型：</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token keyword">enum</span> Color <span class="token punctuation">{</span>
+  Red<span class="token punctuation">,</span>
+  Green<span class="token punctuation">,</span>
+  Blue
+<span class="token punctuation">}</span>
+
+<span class="token keyword">let</span> col <span class="token operator">=</span> Color<span class="token punctuation">.</span>Red
+col <span class="token operator">=</span> <span class="token number">0</span>             <span class="token comment">// 有效的，这也是 Color.Red</span>
+</code></pre></div><h2 id="数字类型枚举与字符串类型"><a href="#数字类型枚举与字符串类型" aria-hidden="true" class="header-anchor">#</a> 数字类型枚举与字符串类型</h2> <p>在我们继续深入枚举类型之前，先让我们看看它编译的 JavaScript，一个简单的 TypeScript 枚举类型：</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token keyword">enum</span> Tristate <span class="token punctuation">{</span>
+  False<span class="token punctuation">,</span>
+  True<span class="token punctuation">,</span>
+  Unknow
+<span class="token punctuation">}</span>
+</code></pre></div><p>编译成 JavaScript：</p> <div class="language-ts extra-class"><div class="highlight-lines"><br><br><div class="highlighted"> </div><br><br><br><br></div><pre class="language-ts"><code><span class="token keyword">var</span> Tristate<span class="token punctuation">;</span>
+<span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span>Tristate<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Tristate<span class="token punctuation">[</span>Tristate<span class="token punctuation">[</span><span class="token string">&quot;False&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;False&quot;</span><span class="token punctuation">;</span>
+    Tristate<span class="token punctuation">[</span>Tristate<span class="token punctuation">[</span><span class="token string">&quot;True&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;True&quot;</span><span class="token punctuation">;</span>
+    Tristate<span class="token punctuation">[</span>Tristate<span class="token punctuation">[</span><span class="token string">&quot;Unknown&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;Unknown&quot;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span>Tristate <span class="token operator">||</span> <span class="token punctuation">(</span>Tristate <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>先让我们聚焦于代码高亮的一行，其中 <code>Tristate[&quot;False&quot;] = 0</code> 用于自我解释，例如将 <code>Tristate</code> 对象里的 <code>False</code> 成员值设置为 <code>0</code>。注意，JavaScript 赋值运算符返回的值是被赋予的值（在此例子中是 <code>0</code>），因此下一次 JavaScript 运行时执行的代码是 <code>Tristate[0] = &quot;False&quot;</code>。意味着你可以使用 <code>Tristate</code> 变量来把字符串枚举类型改造成一个数字或者是数字类型的枚举类型，如下所示：</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token keyword">enum</span> Tristate <span class="token punctuation">{</span>
+  False<span class="token punctuation">,</span>
+  True<span class="token punctuation">,</span>
+  Unkown
+<span class="token punctuation">}</span>
+
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>Tristate<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>                 <span class="token comment">// &quot;False&quot;</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>Tristate<span class="token punctuation">[</span><span class="token string">&quot;False&quot;</span><span class="token punctuation">]</span><span class="token punctuation">)</span>           <span class="token comment">// 0</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>Tristate<span class="token punctuation">[</span>Tristate<span class="token punctuation">.</span>False<span class="token punctuation">]</span><span class="token punctuation">)</span>    <span class="token comment">// &quot;False&quot; because `Tristate.False == 0`</span>
+</code></pre></div><h2 id="改变与数字枚举关联的数字"><a href="#改变与数字枚举关联的数字" aria-hidden="true" class="header-anchor">#</a> 改变与数字枚举关联的数字</h2> <p>默认情况下，第一个枚举值是 <code>0</code>，然后每个后续值依次递增 1：</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token keyword">enum</span> Color <span class="token punctuation">{</span>
+  Red<span class="token punctuation">,</span>        <span class="token comment">// 0</span>
+  Green<span class="token punctuation">,</span>      <span class="token comment">// 1</span>
+  Blue        <span class="token comment">// 2</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>但是，你可以通过特定的赋值来改变给任何枚举成员关联的数字，如下例子，我们从 3 开始依次递增：</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token keyword">enum</span> Color <span class="token punctuation">{</span>
+  DarkRed <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">,</span>      <span class="token comment">// 3</span>
+  DarkGreen<span class="token punctuation">,</span>        <span class="token comment">// 4</span>
+  DarkBlue          <span class="token comment">// 5</span>
+<span class="token punctuation">}</span>
+</code></pre></div><div class="tip custom-block"><p class="custom-block-title">TIP</p> <p>我通常用 <code>= 1</code> 初始化，因为在枚举类型值里，它能让你做一个安全可靠的检查。</p></div> <h2 id="使用数字类型作为标志"><a href="#使用数字类型作为标志" aria-hidden="true" class="header-anchor">#</a> 使用数字类型作为标志</h2> <p>枚举的一个很好的用途是使用枚举作为标志。标志允许你检查一组条件中的某个条件是否为真。考虑如下代码例子，我们有一组关于 animals 的属性：</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token keyword">enum</span> AnimalFlags <span class="token punctuation">{</span>
+  None           <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  HasClaws       <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  CanFly         <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">1</span><span class="token punctuation">,</span>
+  EatsFish       <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">2</span><span class="token punctuation">,</span>
+  Endangered     <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">3</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>在这里，我们使用了左移的位运算符，将数字 <code>1</code> 的二进制向左移动位置得到数字 <code>0001</code>、<code>0010</code>、<code>0100</code> 和 <code>1000</code>（换成十进制结果是：1, 2, 4, 8）。当你在使用这边标记的时候，这些位运算符 <code>|</code> (或)、<code>&amp;</code> （和）、<code>~</code> （非）将会是你最好的朋友：</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token keyword">enum</span> AnimalFlags <span class="token punctuation">{</span>
+  None           <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  HasClaws       <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  CanFly         <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">1</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">printAnimalAbilities</span> <span class="token punctuation">(</span>animal<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">var</span> animalFlags <span class="token operator">=</span> animal<span class="token punctuation">.</span>flags
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>animalFlags <span class="token operator">&amp;</span> AnimalFlags<span class="token punctuation">.</span>HasClaws<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'animal has claws'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>animalFlags <span class="token operator">&amp;</span> AnimalFlags<span class="token punctuation">.</span>CanFly<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'animal can fly'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>animalFlags <span class="token operator">==</span> AnimalFlags<span class="token punctuation">.</span>None<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'nothing'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> animal <span class="token operator">=</span> <span class="token punctuation">{</span> flags<span class="token punctuation">:</span> AnimalFlags<span class="token punctuation">.</span>None <span class="token punctuation">}</span>
+<span class="token function">printAnimalAbilities</span><span class="token punctuation">(</span>animal<span class="token punctuation">)</span>          <span class="token comment">// nothing</span>
+animal<span class="token punctuation">.</span>flags <span class="token operator">|=</span> AnimalFlags<span class="token punctuation">.</span>HasClaws
+<span class="token function">printAnimalAbilities</span><span class="token punctuation">(</span>animal<span class="token punctuation">)</span>          <span class="token comment">// animal has claws</span>
+animal<span class="token punctuation">.</span>flags <span class="token operator">&amp;=</span> <span class="token operator">~</span>AnimalFlags<span class="token punctuation">.</span>HasClaws
+<span class="token function">printAnimalAbilities</span><span class="token punctuation">(</span>animal<span class="token punctuation">)</span>          <span class="token comment">// nothing</span>
+animal<span class="token punctuation">.</span>flags <span class="token operator">|=</span> AnimalFlags<span class="token punctuation">.</span>HasClaws <span class="token operator">|</span> AnimalFlags<span class="token punctuation">.</span>CanFly
+<span class="token function">printAnimalAbilities</span><span class="token punctuation">(</span>animal<span class="token punctuation">)</span>          <span class="token comment">// animal has claws, animal can fly</span>
+
+</code></pre></div><p>在这里：</p> <ul><li>我们使用 <code>|=</code> 来添加一个标志；</li> <li>组合使用 <code>&amp;=</code> 和 <code>~</code> 来清理一个标志；</li> <li><code>|</code> 来合并标志。</li></ul> <div class="tip custom-block"><p class="custom-block-title">TIP</p> <p>你可以组合标志，用来在枚举类型中定义方便快捷的方式，如下 <code>EndangeredFlyingClawedFishEating</code>：</p></div> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token keyword">enum</span> AnimalFlags <span class="token punctuation">{</span>
+  None         <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  HasClaws     <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  CanFly       <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">1</span><span class="token punctuation">,</span>
+
+  EndangeredFlyingClawedFishEating <span class="token operator">=</span> HasClaws <span class="token operator">|</span> CanFly <span class="token operator">|</span> EatsFish <span class="token operator">|</span> Endangered
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="字符串枚举"><a href="#字符串枚举" aria-hidden="true" class="header-anchor">#</a> 字符串枚举</h2> <p>在上文中，我们只看到了数字类型的枚举，实际上，枚举类型的值，也可以是字符串类型。</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token keyword">export</span> <span class="token keyword">enum</span> EvidenceTypeEnum <span class="token punctuation">{</span>
+  <span class="token constant">UNKNOWN</span> <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">,</span>
+  <span class="token constant">PASSPORT_VISA</span> <span class="token operator">=</span> <span class="token string">'passport_visa'</span><span class="token punctuation">,</span>
+  <span class="token constant">PASSPORT</span> <span class="token operator">=</span> <span class="token string">'passport'</span><span class="token punctuation">,</span>
+  <span class="token constant">SIGHTED_STUDENT_CARD</span> <span class="token operator">=</span> <span class="token string">'sighted_tertiary_edu_id'</span><span class="token punctuation">,</span>
+  <span class="token constant">SIGHTED_KEYPASS_CARD</span> <span class="token operator">=</span> <span class="token string">'sighted_keypass_card'</span><span class="token punctuation">,</span>
+  <span class="token constant">SIGHTED_PROOF_OF_AGE_CARD</span> <span class="token operator">=</span> <span class="token string">'sighted_proof_of_age_card'</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>这些可以更容易被处理和调试，因为它们提供有意义/可调试的字符串。</p> <p>你可以使用它们用于简单的字符串比较：</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token comment">// Where `someStringFromBackend` will be '' | 'passport_visa' | 'passport' ... etc.</span>
+<span class="token keyword">const</span> value <span class="token operator">=</span> someStringFromBackend <span class="token keyword">as</span> EvidenceTypeEnum
+
+<span class="token comment">// Sample use in code</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>value <span class="token operator">===</span> EvidenceTypeEnum<span class="token punctuation">.</span><span class="token constant">PASSPORT</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'You provided a passport'</span><span class="token punctuation">)</span>
+    <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// `passport`</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="常量枚举"><a href="#常量枚举" aria-hidden="true" class="header-anchor">#</a> 常量枚举</h2> <div class="language-ts extra-class"><div class="highlight-lines"><br><br><br><br><div class="highlighted"> </div><br><br><br></div><pre class="language-ts"><code><span class="token keyword">enum</span> Tristate <span class="token punctuation">{</span>
+  False<span class="token punctuation">,</span>
+  True<span class="token punctuation">,</span>
+  Unknown
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> lie <span class="token operator">=</span> Tristate<span class="token punctuation">.</span>False
+</code></pre></div><p><code>const lie = Tristate.False</code> 编译成 JavaScript <code>let lie = Tristate.False</code> (是的，编译后与编译前，几乎相同)。这意味着在运行执行时，它将会查找变量 <code>Tristate</code> 和 <code>Tristate.False</code>。在此处或得性能提升的一个小技巧是使用常量枚举：</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token keyword">const</span> <span class="token keyword">enum</span> Tristate <span class="token punctuation">{</span>
+    False<span class="token punctuation">,</span>
+    True<span class="token punctuation">,</span>
+    Unknown
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> lie <span class="token operator">=</span> Tristate<span class="token punctuation">.</span>False
+</code></pre></div><p>将会被编译成：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">let</span> lie <span class="token operator">=</span> <span class="token number">0</span>
+</code></pre></div><p>编译器将会：</p> <ul><li>内联枚举的任何用法（<code>0</code> 而不是 <code>Tristate.False</code>）；</li> <li>不会为枚举类型编译成任何 JavaScript（在这个例子中，运行时没有 <code>Tristate</code> 变量），因为它使用内联语法。</li></ul> <h3 id="常量枚举-preserveconstenums-选项"><a href="#常量枚举-preserveconstenums-选项" aria-hidden="true" class="header-anchor">#</a> 常量枚举 <code>preserveConstEnums</code> 选项</h3> <p>使用内联语法对性能有明显的提升作用。运行时没有 <code>Tristate</code> 变量的事实，是因为编译器帮助你把一些在运行时没有用到的不编译成 JavaScript。然而，你可能想让编译器仍然把枚举类型编译成 JavaScript，用于如上例子中从字符串到数字，或者是从数字到字符串的查找。在这种情景下，你可以使用编译选项 <code>--preserveConstEnums</code>，它会编译出 <code>var Tristate</code> 的定义，因此你在运行时，手动使用 <code>Tristate['False']</code> 和 <code>Tristate[0]</code>。并且这不会以任何方式影响内联。</p> <h2 id="有静态方法的枚举"><a href="#有静态方法的枚举" aria-hidden="true" class="header-anchor">#</a> 有静态方法的枚举</h2> <p>你可以使用 <code>enum</code> + <code>namespace</code> 的声明的方式向枚举类型添加静态方法。如下例所示，我们将静态成员 <code>isBusinessDay</code> 添加到枚举上：</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token keyword">enum</span> Weekday <span class="token punctuation">{</span>
+  Monday<span class="token punctuation">,</span>
+  Tuseday<span class="token punctuation">,</span>
+  Wednesday<span class="token punctuation">,</span>
+  Thursday<span class="token punctuation">,</span>
+  Friday<span class="token punctuation">,</span>
+  Saturday<span class="token punctuation">,</span>
+  Sunday
+<span class="token punctuation">}</span>
+
+<span class="token keyword">namespace</span> Weekday <span class="token punctuation">{</span>
+  <span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">isBusinessDay</span> <span class="token punctuation">(</span>day<span class="token punctuation">:</span> Weekday<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">switch</span> <span class="token punctuation">(</span>day<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">case</span> Weekday<span class="token punctuation">.</span>Saturday<span class="token punctuation">:</span>
+      <span class="token keyword">case</span> Weekday<span class="token punctuation">.</span>Sunday
+        <span class="token keyword">return</span> <span class="token boolean">false</span>
+      <span class="token keyword">default</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">const</span> mon <span class="token operator">=</span> Weekday<span class="token punctuation">.</span>Monday
+<span class="token keyword">const</span> sun <span class="token operator">=</span> Weekday<span class="token punctuation">.</span>Sunday
+
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>Weekday<span class="token punctuation">.</span><span class="token function">isBusinessDay</span><span class="token punctuation">(</span>mon<span class="token punctuation">)</span><span class="token punctuation">)</span>   <span class="token comment">// true</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>Weekday<span class="token punctuation">.</span><span class="token function">isBusinessDay</span><span class="token punctuation">(</span>sun<span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre></div><h2 id="开放式枚举"><a href="#开放式枚举" aria-hidden="true" class="header-anchor">#</a> 开放式枚举</h2> <div class="tip custom-block"><p class="custom-block-title">TIP</p> <p>你只有在不使用模块时，开放式的枚举才有意义，你应该使用模块，因此这部分在文章最后。</p></div> <p>让我们再一次看看编译成 JavaScript 的枚举是什么样子：</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token keyword">var</span> Tristate<span class="token punctuation">;</span>
+<span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span>Tristate<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Tristate<span class="token punctuation">[</span>Tristate<span class="token punctuation">[</span><span class="token string">&quot;False&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;False&quot;</span><span class="token punctuation">;</span>
+    Tristate<span class="token punctuation">[</span>Tristate<span class="token punctuation">[</span><span class="token string">&quot;True&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;True&quot;</span><span class="token punctuation">;</span>
+    Tristate<span class="token punctuation">[</span>Tristate<span class="token punctuation">[</span><span class="token string">&quot;Unknown&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;Unknown&quot;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span>Tristate <span class="token operator">||</span> <span class="token punctuation">(</span>Tristate <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>我们已经解释了 <code>Tristate[Tristate[&quot;False&quot;] = 0] = &quot;False&quot;</code> 部分，现在我们来看看包裹函数 <code>(function (Tristate) { /* code here */})(Tristate || (Tristate = {}))</code>，特别是 <code>(Tristate || (Tristate = {}))</code> 部分。这捕获了一个局部变量 <code>TriState</code>，它将指向已经定义的 <code>TriState</code> 或者是使用一个新的控对象初始化它。</p> <p>这意味着你可以跨多个文件拆分（和扩展）枚举定义，如下所示，你可以把 <code>Color</code> 的定义拆分至两个块中：</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token keyword">enum</span> Color <span class="token punctuation">{</span>
+  Red<span class="token punctuation">,</span>
+  Green<span class="token punctuation">,</span>
+  Blue
+<span class="token punctuation">}</span>
+
+<span class="token keyword">enum</span> Color <span class="token punctuation">{</span>
+  DarkRed <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">,</span>
+  DarkGreen<span class="token punctuation">,</span>
+  DarkBlue
+<span class="token punctuation">}</span>
+</code></pre></div><div class="tip custom-block"><p class="custom-block-title">TIP</p> <p>你应该在枚举的延续块中，初始化第一个成员，以便生成的代码不是先前定义的枚举类型值。TypeScript 将会发出警告，如果你定义初始值（错误信息是：<code>In an enum with multiple declarations, only one declaration can omit an initializer for its first enum element.</code>）。</p></div></div> <div class="page-edit"><div class="edit-link"><a href="https://github.com/jkchao/typescript-book-chinese/edit/master/docs/typings/enums.md" target="_blank" rel="noopener noreferrer">编辑此页</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <div class="last-updated"><span class="prefix">上次更新: </span> <span class="time">8/27/2018, 5:02:33 PM</span></div></div> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/typescript-book-chinese/typings/interfaces.html" class="prev">
+          接口
+        </a></span> <span class="next"><a href="/typescript-book-chinese/typings/lib.html">
+          lib.d.ts
+        </a>
+        →
+      </span></p></div> </div> <!----></div></div>
+    <script src="/typescript-book-chinese/assets/js/17.4cb9c367.js" defer></script><script src="/typescript-book-chinese/assets/js/app.5461745b.js" defer></script>
+  </body>
+</html>
